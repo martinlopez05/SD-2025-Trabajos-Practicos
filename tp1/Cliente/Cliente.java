@@ -1,4 +1,4 @@
-package Cliente;
+package tp1.Cliente;
 
 import java.io.*;
 import java.net.*;

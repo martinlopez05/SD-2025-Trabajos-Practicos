@@ -1,4 +1,4 @@
-package Server;
+package tp1.Server;
 
 import java.io.*;
 import java.net.*;
