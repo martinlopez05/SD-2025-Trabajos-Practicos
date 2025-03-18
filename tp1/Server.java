@@ -2,6 +2,7 @@ import java.io.*;
 import java.net.*;
 
 public class Server {
+    @SuppressWarnings("CallToPrintStackTrace")
     public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(9000)) {
             System.out.println("Servidor esperando conexión...");
@@ -25,7 +26,6 @@ public class Server {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

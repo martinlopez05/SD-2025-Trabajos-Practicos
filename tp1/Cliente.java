@@ -7,6 +7,9 @@ public class Cliente {
     private static final int MAX_RETRIES = 5;  // Máximo de intentos antes de abortar
     private static final int RETRY_DELAY = 5000; // Tiempo de espera en milisegundos
 
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         int retryCount = 0;  // Contador de intentos fallidos
 
@@ -45,7 +48,6 @@ public class Cliente {
                     Thread.sleep(RETRY_DELAY);
                 } catch (InterruptedException ignored) {}
             } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
     }
