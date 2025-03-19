@@ -17,15 +17,22 @@ public class Server {
                     // Enviar saludo al cliente
                     output.println("¡Hola, Cliente!");
 
-                    // Leer el mensaje enviado por el cliente
-                    String message = input.readLine();
-                    System.out.println("Cliente dice: " + message);
+                    
+                    String message;
+                    while ((message = input.readLine()) != null) {  
+                        System.out.println("Cliente dice: " + message);
+                    }
+
+                    
+                    System.out.println("Cliente desconectado.");
 
                 } catch (IOException e) {
-                    System.out.println("Cliente desconectado o error de comunicación.");
+                    System.out.println("Error de comunicación con el cliente.");
                 }
             }
         } catch (IOException e) {
+            e.printStackTrace();  
         }
     }
 }
+
