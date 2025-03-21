@@ -1,5 +1,10 @@
-import java.io.*;
-import java.net.*;
+package unlu;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 public class Cliente {
     private static final String SERVER_HOST = "server";

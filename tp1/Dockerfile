@@ -3,8 +3,16 @@ FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-COPY Nodo.java /app/Nodo.java
+# Copia solo los archivos fuente de Java
+COPY src/main/java /app/src
 
-RUN javac Nodo.java
+WORKDIR /app/src
 
-CMD ["java", "Nodo", "$LISTEN_PORT", "$PEER_HOST", "$PEER_PORT"]
+# Mostrar estructura de archivos para verificar que se copió bien
+RUN ls -R
+
+# Compilar respetando la estructura de paquetes
+RUN javac -d . unlu/Nodo.java
+
+# Ejecutar la aplicación asegurando el classpath
+CMD ["java", "-cp", ".", "unlu.Nodo"]
