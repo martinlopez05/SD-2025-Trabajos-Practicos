@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="84cbb889-149d-4a2e-9447-43ed9c34577c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/tp1/Mensaje.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SD-2025-Trabajos-Practicos.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SD-2025-Trabajos-Practicos.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tp1/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/tp1/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tp1/Nodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/tp1/Nodo.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2ujXzoHKNkkMPIfxAMgpR2JpnkR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "borrador",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Usuario/Desktop/universidad martin/CUARTO AÑO/Sistemas distirbuidos y programacion paralela/Trabajos pracitcos repo/SD-2025-Trabajos-Practicos/tp1/libs/json-20250107.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="84cbb889-149d-4a2e-9447-43ed9c34577c" name="Changes" comment="" />
+      <created>1742763227273</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742763227273</updated>
+    </task>
+    <servers />
+  </component>
+</project>
