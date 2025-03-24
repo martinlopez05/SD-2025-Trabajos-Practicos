@@ -1,18 +1,32 @@
-# Dockerfile
+# Usar una imagen base con Maven y JDK
+FROM maven:3.8.5-openjdk-17 AS build
+
+WORKDIR /app
+
+# Copiar solo pom.xml primero para descargar dependencias y aprovechar caché
+COPY pom.xml .
+
+# Descargar dependencias antes de copiar el resto del código
+RUN mvn dependency:go-offline
+
+# Ahora copiar el código fuente
+COPY src ./src
+
+# Compilar con Maven
+RUN mvn clean package
+
+# Segunda etapa: imagen más liviana con OpenJDK
 FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-# Copia solo los archivos fuente de Java
-COPY src/main/java /app/src
+# Copiar el JAR compilado desde la fase anterior
+COPY --from=build /app/target/*.jar /app/app.jar
 
-WORKDIR /app/src
+# Ejecutar la aplicación
+CMD ["java", "-jar", "/app/app.jar"]
 
-# Mostrar estructura de archivos para verificar que se copió bien
-RUN ls -R
 
-# Compilar respetando la estructura de paquetes
-RUN javac -d . unlu/Nodo.java
 
-# Ejecutar la aplicación asegurando el classpath
-CMD ["java", "-cp", ".", "unlu.Nodo"]
+
+

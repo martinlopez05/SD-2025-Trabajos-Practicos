@@ -1,3 +1,5 @@
+
+
 services:
   nodo1:
     build: .
@@ -6,7 +8,7 @@ services:
       LISTEN_PORT: "9000"
       PEER_HOST: "nodo2"
       PEER_PORT: "9001"
-    command: ["java", "-cp", ".", "unlu.Nodo", "9000", "nodo2", "9001"]
+    command: ["java", "-jar", "/app/app.jar", "9000", "nodo2", "9001"]
     networks:
       - nodos_net
 
@@ -17,7 +19,7 @@ services:
       LISTEN_PORT: "9001"
       PEER_HOST: "nodo1"
       PEER_PORT: "9000"
-    command: ["java", "-cp", ".", "unlu.Nodo", "9001", "nodo1", "9000"]
+    command: ["java", "-jar", "/app/app.jar", "9001", "nodo1", "9000"]
     networks:
       - nodos_net
 
