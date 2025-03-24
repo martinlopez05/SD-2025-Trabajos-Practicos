@@ -15,8 +15,11 @@ COPY src ./src
 # Compilar con Maven
 RUN mvn clean package
 
-# Segunda etapa: imagen más liviana con OpenJDK
+# Segunda etapa: imagen más liviana con OpenJDK y netcat
 FROM openjdk:17-jdk-slim
+
+# Instalar netcat
+RUN apt-get update && apt-get install -y netcat && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -25,8 +28,3 @@ COPY --from=build /app/target/*.jar /app/app.jar
 
 # Ejecutar la aplicación
 CMD ["java", "-jar", "/app/app.jar"]
-
-
-
-
-
