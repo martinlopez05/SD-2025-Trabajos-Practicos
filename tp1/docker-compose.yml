@@ -34,6 +34,32 @@ services:
     networks:
       - nodos_net
 
+  nodo_c3:
+    build: .
+    container_name: nodo_c3
+    environment:
+      LISTEN_PORT: "9002"
+      NODE_D_HOST: "nodo_d"
+      NODE_D_PORT: "5000"
+    command: ["java", "-cp", "/app/app.jar", "unlu.Nodo", "9002", "nodo_d", "5000"]
+    depends_on:
+      - nodo_d
+    networks:
+      - nodos_net
+
+  nodo_c4:
+    build: .
+    container_name: nodo_c4
+    environment:
+      LISTEN_PORT: "9003"
+      NODE_D_HOST: "nodo_d"
+      NODE_D_PORT: "5000"
+    command: ["java", "-cp", "/app/app.jar", "unlu.Nodo", "9003", "nodo_d", "5000"]
+    depends_on:
+      - nodo_d
+    networks:
+      - nodos_net
+
 networks:
   nodos_net:
     driver: bridge
