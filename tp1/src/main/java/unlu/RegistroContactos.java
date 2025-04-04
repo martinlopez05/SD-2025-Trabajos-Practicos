@@ -10,9 +10,13 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,16 +24,18 @@ import org.json.JSONObject;
 public class RegistroContactos {
     private final int puerto;
     private static final String ARCHIVO_INSCRIPCIONES = "inscripciones.json";
+    private static final ZoneId ZONA_ARGENTINA = ZoneId.of("America/Argentina/Buenos_Aires");
 
     public RegistroContactos(int puerto) {
         this.puerto = puerto;
+        iniciarActualizacionPeriodica();
     }
 
     private synchronized void registrarNodo(String ip, String puerto, String horaRegistro) {
         try {
             List<JSONObject> inscripciones = cargarInscripciones();
-            String ventanaTiempo = calcularVentana(horaRegistro);
-            
+            String ventanaTiempo = calcularVentanaSiguiente(horaRegistro);
+
             JSONObject nuevaInscripcion = new JSONObject();
             nuevaInscripcion.put("ip", ip);
             nuevaInscripcion.put("puerto", puerto);
@@ -67,15 +73,21 @@ public class RegistroContactos {
         }
     }
 
-    private synchronized String calcularVentana(String hora) {
-        LocalTime tiempo = LocalTime.parse(hora, DateTimeFormatter.ofPattern("HH:mm:ss"));
-        int minutoVentana = tiempo.getMinute() + 1;
-        return String.format("%02d:%02d", tiempo.getHour(), minutoVentana);
+    private synchronized String calcularVentanaSiguiente(String hora) {
+        LocalTime tiempo = LocalTime.parse(hora, DateTimeFormatter.ofPattern("HH:mm:ss")).withSecond(0);
+        LocalTime siguienteVentana = tiempo.plusMinutes(1);
+        return siguienteVentana.format(DateTimeFormatter.ofPattern("HH:mm"));
+    }
+
+    private synchronized String obtenerVentanaActual() {
+        return LocalTime.now(ZONA_ARGENTINA)
+                .withSecond(0)
+                .format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     private synchronized String obtenerInscripcionesActivas() {
         List<JSONObject> inscripciones = cargarInscripciones();
-        String ventanaActual = calcularVentana(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+        String ventanaActual = obtenerVentanaActual();
 
         JSONArray activas = new JSONArray();
         for (JSONObject inscripcion : inscripciones) {
@@ -84,6 +96,36 @@ public class RegistroContactos {
             }
         }
         return activas.toString();
+    }
+
+    private void iniciarActualizacionPeriodica() {
+        Timer timer = new Timer(true);
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                actualizarVentana();
+            }
+        }, 0, 60 * 1000); // Ejecutar cada 60 segundos
+    }
+
+    private synchronized void actualizarVentana() {
+        List<JSONObject> inscripciones = cargarInscripciones();
+        String ventanaActual = obtenerVentanaActual();
+        List<JSONObject> nuevasInscripciones = new ArrayList<>();
+
+        Iterator<JSONObject> iterator = inscripciones.iterator();
+        while (iterator.hasNext()) {
+            JSONObject inscripcion = iterator.next();
+            if (inscripcion.getString("ventana").equals(ventanaActual)) {
+                nuevasInscripciones.add(inscripcion);
+                iterator.remove();
+            }
+        }
+
+        // Guardar solo las inscripciones futuras en el archivo
+        guardarInscripciones(inscripciones);
+
+        System.out.println("[Nodo D] Ventana actualizada: " + ventanaActual);
     }
 
     public void start() {
@@ -96,7 +138,7 @@ public class RegistroContactos {
                 String receivedData = in.readLine();
 
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                if (receivedData.equals("CONSULTAR_INSCRIPCIONES")) {
+                if ("CONSULTAR_INSCRIPCIONES".equals(receivedData)) {
                     out.println(obtenerInscripcionesActivas());
                 } else {
                     JSONObject json = new JSONObject(receivedData);
@@ -124,4 +166,3 @@ public class RegistroContactos {
         nodoD.start();
     }
 }
-

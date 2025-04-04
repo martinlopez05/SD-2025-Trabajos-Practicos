@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import org.json.JSONObject;
@@ -26,8 +27,7 @@ public class Nodo {
             JSONObject json = new JSONObject();
             json.put("ip", InetAddress.getLocalHost().getHostAddress());
             json.put("puerto", String.valueOf(puertoLocal));
-            json.put("horaRegistro", LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))); // Registrar hora
-
+            json.put("horaRegistro", LocalTime.now(ZoneId.of("America/Argentina/Buenos_Aires")).format(DateTimeFormatter.ofPattern("HH:mm:ss")));
             System.out.println("[Nodo C] Enviando solicitud de inscripción a Nodo D: " + json.toString());
 
             Socket socket = new Socket(ipNodoD, puertoNodoD);
@@ -79,4 +79,3 @@ public class Nodo {
         nodo.consultarInscripciones();
     }
 }
-
