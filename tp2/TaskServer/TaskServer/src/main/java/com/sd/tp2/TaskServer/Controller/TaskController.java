@@ -27,8 +27,8 @@ public class TaskController {
         TaskResponse response = new TaskResponse();
 
         double resultado;
-        Double param1 = request.getParam1();
-        Double param2 = request.getParam2();
+        Double param1 = request.getParameter1();
+        Double param2 = request.getParameter2();
       
         switch (request.getOperation().toLowerCase()) {
             case "suma":

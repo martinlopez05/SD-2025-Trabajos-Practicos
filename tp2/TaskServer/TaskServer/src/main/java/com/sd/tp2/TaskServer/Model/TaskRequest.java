@@ -11,8 +11,8 @@ package com.sd.tp2.TaskServer.Model;
 public class TaskRequest {
 
     private String operation;
-    private double param1;
-    private double param2;
+    private double parameter1;
+    private double parameter2;
 
     // Getters y setters
     public String getOperation() {
@@ -23,19 +23,24 @@ public class TaskRequest {
         this.operation = operation;
     }
 
-    public double getParam1() {
-        return param1;
+    public double getParameter1() {
+        return parameter1;
     }
 
-    public void setParam1(double param1) {
-        this.param1 = param1;
+    public void setParameter1(double param1) {
+        this.parameter1 = param1;
     }
 
-    public double getParam2() {
-        return param2;
+    public double getParameter2() {
+        return parameter2;
     }
 
-    public void setParam2(double param2) {
-        this.param2 = param2;
+    public void setParameter2(double param2) {
+        this.parameter2 = param2;
     }
+
+    public TaskRequest() {
+    }
+    
+    
 }

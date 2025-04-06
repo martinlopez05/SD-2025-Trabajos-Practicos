@@ -35,7 +35,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class TaskController {
 
-    @PostMapping("/getRemoteTask")
+    @GetMapping("/getRemoteTask")
     public ResponseEntity<String> ejecutarTareaRemota(@RequestBody Task request) throws IOException, InterruptedException {
         String containerId = null;
         try {
@@ -47,8 +47,8 @@ public class TaskController {
             TaskRequestDto requestDto = new TaskRequestDto();
 
             requestDto.setOperation(request.getOperation());
-            requestDto.setParam1(request.getParameter1());
-            requestDto.setParam2(request.getParameter2());
+            requestDto.setParameter1(request.getParameter1());
+            requestDto.setParameter2(request.getParameter2());
             String result = callTaskService(requestDto);
             return ResponseEntity.ok(result);
         } catch (Exception e) {

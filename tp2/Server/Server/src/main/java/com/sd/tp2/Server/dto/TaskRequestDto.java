@@ -11,35 +11,18 @@ package com.sd.tp2.Server.dto;
 public class TaskRequestDto {
     
     private String operation;
-    private Double param1;
-    private Double param2; 
+    private Double parameter1;
+    private Double parameter2;
 
-    public String getOperation() {
-        return operation;
-    }
+    public String getOperation() { return operation; }
+    public Double getParameter1() { return parameter1; }
+    public Double getParameter2() { return parameter2; }
 
-    public Double getParam1() {
-        return param1;
-    }
+    public void setOperation(String operation) { this.operation = operation; }
+    public void setParameter1(Double parameter1) { this.parameter1 = parameter1; }
+    public void setParameter2(Double parameter2) { this.parameter2 = parameter2; }
 
-    public Double getParam2() {
-        return param2;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation;
-    }
-
-    public void setParam1(Double param1) {
-        this.param1 = param1;
-    }
-
-    public void setParam2(Double param2) {
-        this.param2 = param2;
-    }
-
-    public TaskRequestDto() {
-    }
+    public TaskRequestDto() {}
     
     
 }
