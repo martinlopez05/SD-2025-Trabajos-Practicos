@@ -8,6 +8,8 @@ FROM eclipse-temurin:17-jdk
 # Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y docker.io
+
 # Copiar el archivo JAR de la aplicación
 COPY target/*.jar app.jar
 

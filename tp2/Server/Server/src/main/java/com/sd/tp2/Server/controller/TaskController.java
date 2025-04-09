@@ -35,7 +35,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class TaskController {
 
-    @GetMapping("/getRemoteTask")
+    @PostMapping("/getRemoteTask")
     public ResponseEntity<String> ejecutarTareaRemota(@RequestBody Task request) throws IOException, InterruptedException {
         String containerId = null;
         try {
@@ -90,7 +90,7 @@ public class TaskController {
     }
 
     private String callTaskService(TaskRequestDto request) throws IOException, InterruptedException {
-        String url = "http://localhost:8081/executeTask";
+        String url = "http://host.docker.internal:8081/executeTask";
         waitForService(url);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);

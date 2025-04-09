@@ -1,0 +1,15 @@
+
+version: '3.8'
+
+services:
+  servidor:
+    build: .
+    container_name: server
+    ports:
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+
