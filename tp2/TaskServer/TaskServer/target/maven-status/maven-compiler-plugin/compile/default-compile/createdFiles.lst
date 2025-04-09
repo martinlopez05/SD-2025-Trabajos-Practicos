@@ -1,0 +1,4 @@
+com\sd\tp2\TaskServer\Model\TaskRequest.class
+com\sd\tp2\TaskServer\TaskServerApplication.class
+com\sd\tp2\TaskServer\Controller\TaskController.class
+com\sd\tp2\TaskServer\Model\TaskResponse.class
