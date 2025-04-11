@@ -41,6 +41,4 @@ public class TaskRequest {
 
     public TaskRequest() {
     }
-    
-    
 }

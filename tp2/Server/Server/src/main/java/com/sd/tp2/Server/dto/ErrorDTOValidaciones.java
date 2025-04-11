@@ -5,6 +5,7 @@
 package com.sd.tp2.Server.dto;
 
 import java.util.List;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,11 +16,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class ErrorDTOValidaciones extends ErrorDTO {
-    
     private List<String> details;
 
     public ErrorDTOValidaciones(List<String> details, String message, String errorCode, String detail, String path) {
         super(message, errorCode, detail, path);
         this.details = details;
-    }    
+    }
 }
