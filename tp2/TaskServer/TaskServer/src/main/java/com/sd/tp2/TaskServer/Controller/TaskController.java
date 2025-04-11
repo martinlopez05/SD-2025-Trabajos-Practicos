@@ -29,7 +29,7 @@ public class TaskController {
         double resultado;
         Double param1 = request.getParameter1();
         Double param2 = request.getParameter2();
-      
+
         switch (request.getOperation().toLowerCase()) {
             case "suma":
                 resultado = param1 + param2;
@@ -49,10 +49,15 @@ public class TaskController {
             default:
                 return ResponseEntity.badRequest().body(new TaskResponse("Operación no válida", null));
         }
-        
+
         response.setOperation(request.getOperation());
         response.setResult(resultado);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("OK");
     }
 
 }
