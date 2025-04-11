@@ -14,12 +14,11 @@ import lombok.Setter;
  *
  * @author Usuario
  */
-
 @Getter
 @Setter
 @AllArgsConstructor
 public class Task {
-    
+
     @NotBlank(message = "La operación no puede estar vacía")
     private String operation;
 
