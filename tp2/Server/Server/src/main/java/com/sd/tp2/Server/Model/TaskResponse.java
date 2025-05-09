@@ -9,7 +9,7 @@ package com.sd.tp2.Server.Model;
  * @author Usuario
  */
 public class TaskResponse {
-    
+
     private String operation;
     private Double result;
 
@@ -36,7 +36,5 @@ public class TaskResponse {
     public void setResult(Double result) {
         this.result = result;
     }
-    
-    
-    
+
 }

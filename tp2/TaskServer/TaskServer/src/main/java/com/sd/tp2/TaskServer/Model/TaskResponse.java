@@ -9,18 +9,13 @@ package com.sd.tp2.TaskServer.Model;
  * @author Usuario
  */
 public class TaskResponse {
-    
+
     private String operation;
     private Double result;
-
-    
 
     public Double getResult() {
         return result;
     }
-
-    
-    
 
     public void setResult(Double result) {
         this.result = result;
@@ -42,9 +37,4 @@ public class TaskResponse {
         this.operation = operation;
     }
 
-    
-
-    
-       
-    
 }
