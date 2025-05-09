@@ -1,8 +1,0 @@
-com\sd\tp2\Server\dto\ErrorDTOValidaciones.class
-com\sd\tp2\Server\ServerApplication.class
-com\sd\tp2\Server\dto\ErrorDTO.class
-com\sd\tp2\Server\exception\GlobalExceptionHandler.class
-com\sd\tp2\Server\Model\TaskResponse.class
-com\sd\tp2\Server\controller\TaskController.class
-com\sd\tp2\Server\Model\Task.class
-com\sd\tp2\Server\dto\TaskRequestDto.class

@@ -1,0 +1,6 @@
+com\mycompany\sobelcentral\Master.class
+com\mycompany\sobelcentral\SobelDistributed$SobelTask.class
+com\mycompany\sobelcentral\Worker.class
+com\mycompany\sobelcentral\SobelCentral.class
+com\mycompany\sobelcentral\Master$WorkerTask.class
+com\mycompany\sobelcentral\SobelDistributed.class
