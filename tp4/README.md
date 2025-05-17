@@ -1,6 +1,6 @@
 # Descripción de los ejercicios del Trabajo Práctico 4
 
-- > Link al pdf del [informe]()
+- > Link al pdf del [informe](https://github.com/martinlopez05/SD-2025-Trabajos-Practicos/blob/main/tp4/informe-completo.md)
 
 ## *Hit #1*
 
