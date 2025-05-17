@@ -13,4 +13,4 @@ Cada uno de los TP´s tiene su respectivo ```README.md``` con la explicación de
 
 - > Link al ```README.md``` del [TP3](https://github.com/roccobuzzomarcelo/Sobel)
 
-- > Link al ```README.md``` del TP4
+- > Link al ```README.md``` del [TP4](https://github.com/martinlopez05/SD-2025-Trabajos-Practicos/tree/main/tp4)
