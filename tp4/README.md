@@ -199,3 +199,24 @@ Otras combinaciones posibles incluyen:
 - Para vec2: `.x, .y / .r, .g / .s, .t`
 - Para vec3: `.x, .y, .z / .r, .g, .b / .s, .t, .p`
 - Para vec4: `.x, .y, .z, .w / .r, .g, .b, .a / .s, .t, .p, .q`
+
+* * *
+
+## *Hit #2*
+
+**Consigna:** Vea el video de Inigo Quilez <https://www.youtube.com/watch?v=0ifChJ0nJfM> donde utilizando matemáticas, trigonometría, shaders y mucha creatividad dibuja una palmera en la playa.
+Documente el video de forma somera, ¿qué conclusiones saca al respecto?
+**Consideración: Corto y conciso.**
+
+* * *
+
+En el video *[Learn to Paint with Mathematics](https://www.youtube.com/watch?v=0ifChJ0nJfM)*, Inigo Quilez muestra como se puede crear una escena, en este caso una palmera en la playa, utilizando exclusivamente código GLSL. A lo largo del video, Quilez usa funciones matemáticas básicas como `sin()`, `cos()`, `mod()`, y `smoothstep()` para construir cada elemento de la imagen: el cielo, el mar, la arena y la palmera.
+
+Para poder hacer esto Inigo hace estas cosas:
+
+- **Normaliza las coordenadas** xy en coordenadas uv para poder garantizar que los gráficos no dependan de la resolución de la pantalla.
+- Usa **funciones periódicas** como `sin()` y `cos()` para generar patrones repetitivos y formas de curvas.
+- **Construye formas** complejas combinando funciones matemáticas que se construyen a partir de circulos y líneas.
+- Utiliza gradientes y colores para darle profundidad y realismo a la escena.
+
+Inigo nos permitió entender que a partir de un conjunto de funciones matemáticas no muy complejas se pueden hacer imágenes que sean visualmente atractivas. Además nos muestra que se pueden hacer imágenes sin utilzar herramientas de diseño tradicionales, reemplazandolas por matemáticas y código.
