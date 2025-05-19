@@ -220,3 +220,51 @@ Para poder hacer esto Inigo hace estas cosas:
 - Utiliza gradientes y colores para darle profundidad y realismo a la escena.
 
 Inigo nos permitió entender que a partir de un conjunto de funciones matemáticas no muy complejas se pueden hacer imágenes que sean visualmente atractivas. Además nos muestra que se pueden hacer imágenes sin utilzar herramientas de diseño tradicionales, reemplazandolas por matemáticas y código.
+* * *
+
+## *Hit #3 y Hit #4*
+
+ Hora de ensuciarse las manos, utilizando shadertoy seleccione en iChannel0 una fuente de textura para poder continuar esta guía, puede ser una imagen de ejemplo, un video de ejemplo o para hacerlo más entretenido, su cámara web.
+El siguiente shader muestra de forma trivial como copiar los pixeles desde el iChannel0 a la salida:
+
+```GLSL
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) 
+{
+    vec2 uv = (fragCoord.xy / iResolution.xy);
+    fragColor = texture(iChannel0, uv);
+}
+```
+
+Utilizando como punto de partida el HIT#3 y sin perder de vista lo que documentó en los hits anteriores, modifique el código para poner la imagen cabeza abajo, es decir aplicar lo que comúnmente se llama un efecto de FLIPY o voltear vertical. Luego haga el FLIPX o voltee horizontal (también llamado espejo).
+Si no lo había hecho previamente, amplíe su informe sobre la potencialidad de UV.
+**Consideración: Corto y conciso**
+* * *
+**Resolucion:** FLIPY (volteo vertical)
+
+```GLSL
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) 
+{
+    vec2 uv = fragCoord.xy / iResolution.xy;
+
+    uv.y = 1.0 - uv.y;
+
+    fragColor = texture(iChannel0, uv);
+}
+```
+
+**Resolucion:** FLIPX (volteo horizontal)
+
+```GLSL
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) 
+{
+    vec2 uv = fragCoord.xy / iResolution.xy;
+
+    uv.x = 1.0 - uv.x;
+
+    fragColor = texture(iChannel0, uv);
+}
+```
+
+Las coordenadas UV permiten mapear texturas sobre geometrías. Usándolas, es posible escalar, rotar, trasladar o voltear imágenes de forma flexible y eficiente, esencial en gráficos por computadora para generar efectos visuales sin modificar los datos de la imagen original.
+
+* * *
