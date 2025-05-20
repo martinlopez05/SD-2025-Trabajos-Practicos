@@ -332,3 +332,44 @@ Con distintos valores de threshold:
 - 0.5: muy estricto, solo elimina el verde puro, por lo que hay contornos verdes visibles.
 - 0.6: balanceado, buena eliminación del fondo verde sin perder detalles.
 - 0.745+: elimina más tonos verdes, pero puede borrar partes del cuerpo o vestuario si hay verde.
+
+* * *
+
+## *Hit #6*
+
+**Resolucion:** Modifique el programa para aplicar un filtro de escala de grises acorde a <https://en.wikipedia.org/wiki/Grayscale>, luego documente los cambios realizados.
+
+```GLSL
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+    vec2 uv = fragCoord.xy / iResolution.xy;
+
+    // Carga las dos texturas
+    vec4 britney = texture(iChannel1, uv); // Britney
+    vec4 background = texture(iChannel0, uv); // Fondo
+
+    // Color verde chroma a eliminar
+    vec4 chromaColor = vec4(0.0, 1.0, 0.0, 1.0); // Verde puro
+
+    // Umbral de tolerancia
+    float threshold = 0.745;
+
+    // Distancia euclideana entre color actual y el verde
+    float dist = distance(britney.rgb, chromaColor.rgb);
+
+    // Elección de color base (figura o fondo)
+    vec4 finalColor = dist < threshold ? background : britney;
+
+    // Aplicación de escala de grises
+    float gray = dot(finalColor.rgb, vec3(0.299, 0.587, 0.114));
+    fragColor = vec4(vec3(gray), 1.0);
+}
+```
+
+Conversión a escala de grises:
+
+- Después de elegir si mostrar el píxel de la figura o del fondo, se aplica una fórmula de luminancia para convertir ese color a gris: `gray = 0.299 * R + 0.587 * G + 0.114 * B`. Se usa dot(finalColor.rgb, vec3(0.299, 0.587, 0.114)) para calcular la luminancia.
+- Esta fórmula prioriza los componentes verde y rojo, imitando la sensibilidad del ojo humano.
+- Finalmente, se convierte el color a un gris uniforme: `vec4(vec3(gray), 1.0)`.
+
+El resultado visual de este shader es una imagen completamente en blanco y negro donde el fondo verde fue eliminado exitosamente y reemplazado por otra fuente visual. Esta técnica se puede extender fácilmente a otros colores clave o incluso a fondos dinámicos. Además, el efecto en escala de grises le da un toque más artístico o técnico, dependiendo del contexto.
