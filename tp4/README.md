@@ -268,3 +268,67 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 Las coordenadas UV permiten mapear texturas sobre geometrías. Usándolas, es posible escalar, rotar, trasladar o voltear imágenes de forma flexible y eficiente, esencial en gráficos por computadora para generar efectos visuales sin modificar los datos de la imagen original.
 
 * * *
+
+## *Hit #5*
+
+Tomando como base el ejemplo anterior, en iChannel1 agregue una fuente de textura de video, puede usar el de ejemplo de Britney Spears. Quite los efectos flips y muestre la nueva textura en lugar de la de iChannel0.
+
+Va a implementar ahora un filtro chroma básico, su objetivo es cambiar el color de los píxeles verdes del fondo por el video proveniente de iChannel0 (su webcam) para poder bailar como malocorista detrás de Britney Spears (el baile es opcional pero altamente recomendable).
+
+Para implementar un filtro chroma primero necesitará recordar algunos conceptos matemáticos en particular el que proviene de la geometría, y es la distancia pitagórica en N dimensiones (si, la fórmula esa del triángulo rectángulo pero en N dimensiones).
+
+Vamos pasito a pasito como decía mostaza merlo hasta poder unir todas la piezas (<https://www.youtube.com/watch?v=cGBvmbtpLcE>).
+
+En primer lugar tiene que definir el color del chroma dentro de un vec4.
+
+Luego tiene que definir un umbral de chroma dentro de un float.
+
+Luego tiene que calcular la distancia entre el color del iChannel1 y el color del chroma con el teorema de distancia pitagórica en n dimensiones, siendo n=3.
+
+Finalmente elegir si mostrar la textura de un canal u otro en funcion de si la distancia supera o no el umbral establecido.
+
+Modifique el umbral a diferentes valores. Analice los resultados. Documente la experiencia. Haga screenshots bailando como malocorista con el efecto chroma (opcional).
+
+* * *
+**Resolucion:** Código GLSL con filtro Chroma
+
+```GLSL
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+    vec2 uv = fragCoord.xy / iResolution.xy;
+
+    // Carga las dos texturas
+    vec4 britney = texture(iChannel1, uv); // Britney
+    vec4 background = texture(iChannel0, uv);    // Fondo
+
+    // Color verde chroma a eliminar
+    vec4 chromaColor = vec4(0.0, 1.0, 0.0, 1.0); // Verde puro
+
+    // Umbral de tolerancia (ajustable)
+    float threshold = 0.745;
+
+    // Distancia euclideana entre colores en RGB
+    float dist = distance(britney.rgb, chromaColor.rgb);
+
+    // Si el color del video está cerca del verde, usar el fondo
+    if (dist < threshold)
+        fragColor = background;
+    else
+        fragColor = britney;
+}
+```
+
+Las coordenadas UV permiten acceder a cualquier punto de una textura y son fundamentales para aplicar efectos visuales y combinar imágenes dinámicamente.
+
+Experiencia Chroma:
+
+- El filtro funciona midiendo que tan cerca está el color de un píxel del verde (en este caso chromaColor).
+- El umbral define qué tan permisivo es el filtro con tonalidades similares al verde.
+- Ajustar el umbral permite balancear entre mantener detalles y remover bien el fondo.
+- Esto se puede mejorarse usando espacio HSV o técnicas de suavizado en los bordes.
+
+Con distintos valores de threshold:
+
+- 0.5: muy estricto, solo elimina el verde puro, por lo que hay contornos verdes visibles.
+- 0.6: balanceado, buena eliminación del fondo verde sin perder detalles.
+- 0.745+: elimina más tonos verdes, pero puede borrar partes del cuerpo o vestuario si hay verde.
